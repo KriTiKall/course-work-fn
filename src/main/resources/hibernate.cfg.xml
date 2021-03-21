@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/food_network</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">_PLKbnty15LOH</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+        <property name="show_sql">true</property>
+
+        <mapping class="data.entity.Client" />
+        <mapping class="data.entity.Department"/>
+        <mapping class="data.entity.OrderItem"/>
+        <mapping class="data.entity.Order" />
+        <mapping class="data.entity.Product"/>
+        <mapping class="data.entity.User" />
+        <mapping class="data.entity.Warehouse" />
+    </session-factory>
+</hibernate-configuration>
