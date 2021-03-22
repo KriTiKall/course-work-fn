@@ -11,9 +11,12 @@ public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "id_department")
+    private Integer idDepartment;
     private String phone;
     private String city;
     private String street;
+    @Column(name = "building_num")
     private Integer buildingNum;
 
     public Long getId() {
@@ -54,5 +57,20 @@ public class Warehouse {
 
     public void setBuildingNum(Integer buildingNum) {
         this.buildingNum = buildingNum;
+    }
+
+    public Integer getIdDepartment() {
+        return idDepartment;
+    }
+
+    public void setIdDepartment(Integer idDepartment) {
+        this.idDepartment = idDepartment;
+    }
+
+    @Override
+    public String toString() {
+        return "г. '" + city + '\'' +
+                ", ул. " + street + '\'' +
+                ", д. " + buildingNum;
     }
 }

@@ -1,22 +1,20 @@
-import data.dao.ClientDao
-import data.entity.Client
+import controller.MainController
+import logic.MainService
 import org.hibernate.cfg.Configuration
+import view.MainForm
+import view.WarehouseForm
 
 
 fun main() {
     val sessionFactory = Configuration().configure().buildSessionFactory()
 
-    sessionFactory.use {
-        val dao = ClientDao(sessionFactory)
-        val entity = Client()
-        with(entity) {
-            name = "Maxim"
-            mail = "asdasd@mail.ru"
-            phone = "89523485967"
-        }
 
-        dao.create(entity)
+    val form = MainForm()
+    val service = MainService(sessionFactory)
+    val controller = MainController(form, service)
 
-//        dao.list.forEach(::print)
-    }
+    sessionFactory.close()
+
+//    val form = WarehouseForm()
+//    form.createUI()
 }

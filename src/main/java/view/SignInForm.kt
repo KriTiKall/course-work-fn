@@ -4,7 +4,7 @@ import java.awt.Font
 import javax.swing.*
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
-class SigInForm {
+class SignInForm {
 
     companion object {
         const val SCREEN_HEIGHT = 1080

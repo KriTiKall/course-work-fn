@@ -14,7 +14,7 @@ public class OrderItem {
     private Integer idProduct;
     private Integer idOrder;
     private Integer count;
-    private Integer unitPrice;
+    private Double unitPrice;
 
     public Long getId() {
         return id;
@@ -48,11 +48,19 @@ public class OrderItem {
         this.count = count;
     }
 
-    public Integer getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Integer unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + idProduct +
+                ", count=" + count +
+                '}';
     }
 }

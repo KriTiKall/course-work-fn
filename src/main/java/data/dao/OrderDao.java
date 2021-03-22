@@ -26,4 +26,10 @@ public class OrderDao extends AbstractDao<Order, Long> {
             return session.getSession().createQuery("from Order").list();
         }
     }
+
+    public void getId(Order order) {
+        try (final Session session = sessionFactory.openSession()) {
+            session.getIdentifier(order);
+        }
+    }
 }
