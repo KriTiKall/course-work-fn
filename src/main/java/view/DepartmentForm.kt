@@ -1,9 +1,12 @@
 package view
 
-import javax.swing.*
+import data.entity.Department
+import javax.swing.JComponent
+import javax.swing.JLabel
+import javax.swing.JTextField
 import javax.swing.text.JTextComponent
 
-class DepartmentForm : AbstractForm() {
+class DepartmentForm : AbstractForm<Department>() {
 
     val components: Map<String, JComponent> = mapOf(
         "name" to JLabel("Название"),
@@ -29,7 +32,7 @@ class DepartmentForm : AbstractForm() {
         val com = components.values
         val textCom = textComponents.values
 
-        for (x in 0..(com.size - 1) ) {
+        for (x in 0..(com.size - 1)) {
             locationHelper++
             toPlace(com.elementAt(x))
             toPlaceText(textCom.elementAt(x))

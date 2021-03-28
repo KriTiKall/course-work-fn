@@ -1,10 +1,9 @@
 package view
 
-import data.entity.Department
 import javax.swing.*
 import javax.swing.text.JTextComponent
 
-abstract class AbstractForm {
+abstract class AbstractForm<Entity> {
 
     companion object {
         const val SCREEN_HEIGHT = 1080
@@ -32,7 +31,7 @@ abstract class AbstractForm {
     val lManage = JLabel("Управление сущностью")
     val frMain = JFrame()
 
-    val list = JList<Department>()
+    val list = JList<Entity>()
     val scList = JScrollPane(list)
 
     val bAdd = JButton("Добавить")
@@ -111,4 +110,6 @@ abstract class AbstractForm {
         }
         frMain.add(component)
     }
+
+    fun getSelected(): Entity? = list.selectedValue as Entity?
 }

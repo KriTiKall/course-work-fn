@@ -3,144 +3,64 @@ package controller
 import data.entity.Department
 import logic.MainService
 import view.DepartmentForm
-import java.awt.event.ActionListener
-import javax.swing.DefaultListModel
-import javax.swing.JOptionPane
-import javax.swing.event.ListSelectionListener
 
 
-class DepartmentController(view: DepartmentForm, service: MainService) {
+class DepartmentController(view: DepartmentForm, service: MainService) :
+    AbstractController<Department, DepartmentForm>(view = view, dao = service.depDao, mock = Department()) {
 
-    private val view = view
     private val service = service
 
-    var mock = Department()
-
-    private val model = DefaultListModel<Department>()
-
-    val options = arrayOf<Any>(
-        "Изменить",
-        "Удалить",
-        "Закрыть"
-    )
-
-
-    fun initView() {
-        view.apply {
-            list.model = model
-            loadItems()
-
-            bAdd.addActionListener(actionOfAdd())
-            bUpdate.addActionListener(actionOfUpdate())
-            list.addListSelectionListener(actionOfUpdateOrDelete())
-        }
-
-        view.createUI()
+    override fun update(entity: Department) {
+        mock.id = entity.id
+        view.bUpdate.isVisible = true
+        fromFieldToText(view, entity)
     }
 
-    private fun actionOfAdd() = ActionListener {
-        val dep = Department()
-
-        fromTextToField(dep, view)
-
-        clean()
-        view.list.repaint()
-        service.depDao.create(dep)
-        loadItems()
+    override fun delete(entity: Department) {
         view.bUpdate.isVisible = false
-    }
-
-    private fun actionOfUpdate() = ActionListener {
-
-        view.bUpdate.isVisible = false
-
-        fromTextToField(mock, view)
-
-        clean()
-
-
-        service.depDao.update(mock)
+        service.depDao.delete(entity)
         loadItems()
     }
 
-    private fun actionOfUpdateOrDelete() = ListSelectionListener {
-        val temp = view.list.selectedValue as Department?
-        if (temp != null) {
-            val op = JOptionPane.showOptionDialog(
-                view.frMain,
-                "Что вы хотете сделать с выбраннм элементом?",
-                "Выбор действия",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]
-            )
-
-            if (op == JOptionPane.YES_OPTION) {
-                mock.id = temp.id
-                view.bUpdate.isVisible = true
-                fromFieldToText(view, temp)
-            }
-            if (op == JOptionPane.NO_OPTION) {
-                //todo(cann't delete dep because ware has constraint)
-                view.bUpdate.isVisible = false
-                service.depDao.delete(temp)
-                loadItems()
-            }
-        }
-    }
-
-    private fun update(temp: Department) {
-
-    }
-
-    private fun delete() {
-        view.apply {
-            val dep = list.selectedValue as Department
-            service.depDao.delete(dep)
-        }
-
-        loadItems()
-    }
-
-    private fun fromTextToField(entity: Department, form: DepartmentForm) =
+    override fun fromTextToField(entity: Department, form: DepartmentForm) {
         entity.apply {
             form.apply {
-                name = textComponents["tfName"]?.text
-                phone = textComponents["tfPhone"]?.text
-                city = textComponents["tfCity"]?.text
-                street = textComponents["tfStreet"]?.text
-                buildingNum = textComponents["tfBuilding"]?.text!!.toInt()
-                officeNum = textComponents["tfOffice.text.toInt()"]?.text!!.toInt()
+                name = textComponents["name"]?.text
+                phone = textComponents["pone"]?.text
+                city = textComponents["city"]?.text
+                street = textComponents["street"]?.text
+                buildingNum = textComponents["building"]?.text!!.toInt()
+                officeNum = textComponents["office"]?.text!!.toInt()
             }
-        }
-
-    private fun fromFieldToText(form: DepartmentForm, entity: Department) =
-        entity.apply {
-            form.apply {
-                textComponents["tfName"]?.text = name
-                textComponents["tfPhone"]?.text = phone
-                textComponents["tfCity"]?.text = city
-                textComponents["tfStreet"]?.text = street
-                textComponents["tfBuilding"]?.text = buildingNum.toString()
-                textComponents["tfOffice.text.toInt()"]?.text = officeNum.toString()
-            }
-        }
-
-    private fun clean() {
-        view.apply {
-            textComponents["tfName"]?.text = ""
-            textComponents["tfPhone"]?.text = ""
-            textComponents["tfCity"]?.text = ""
-            textComponents["tfStreet"]?.text = ""
-            textComponents["tfBuilding"]?.text = ""
-            textComponents["tfOffice.text.toInt()"]?.text = ""
         }
     }
 
-    private fun loadItems() {
+    override fun fromFieldToText(form: DepartmentForm, entity: Department) {
+        entity.apply {
+            form.apply {
+                textComponents["name"]?.text = name
+                textComponents["phone"]?.text = phone
+                textComponents["city"]?.text = city
+                textComponents["street"]?.text = street
+                textComponents["building"]?.text = buildingNum.toString()
+                textComponents["office"]?.text = officeNum.toString()
+            }
+        }
+    }
+
+    override fun clean() {
+        view.apply {
+            textComponents["name"]?.text = ""
+            textComponents["phone"]?.text = ""
+            textComponents["city"]?.text = ""
+            textComponents["street"]?.text = ""
+            textComponents["building"]?.text = ""
+            textComponents["office"]?.text = ""
+        }
+    }
+
+    override fun loadItems() {
         model.clear()
-        service.depDao.list.forEach { model.addElement(it) }
+        dao.list.forEach { model.addElement(it) }
     }
 }
