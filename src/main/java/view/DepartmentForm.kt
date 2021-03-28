@@ -9,10 +9,25 @@ class DepartmentForm {
         const val SCREEN_HEIGHT = 1080
         const val SCREEN_WIDTH = 1920
 
-        const val WINDOW_HEIGHT = 250
-        const val WINDOW_WIDTH = 250
+        const val WINDOW_HEIGHT = 360
+        const val WINDOW_WIDTH = 500
+
+        const val FIRST_W = 80
+        const val FIRST_H = 20
+        const val FIRST_X = 10
+        const val FIRST_Y = 20
+
+        const val SECOND_W = 120
+        const val SECOND_H = 20
+        const val SECOND_X = 100
+        const val SECOND_Y = 20
+
+        const val STEP = 30
     }
 
+    var locationHelper = 0
+
+    val lManage = JLabel("Управление сущностью Department")
     val frMain = JFrame()
     val lName = JLabel("Название")
     val tfName = JTextField()
@@ -26,7 +41,12 @@ class DepartmentForm {
     val tfBuilding = JTextField()
     val lOffice = JLabel("Офис")
     val tfOffice = JTextField()
+
+    val list = JList<Department>()
+    val scList = JScrollPane(list)
+
     val bAdd = JButton("Добавить")
+    val bUpdate = JButton("Обновить")
 
     fun createUI() {
         frMain.apply {
@@ -39,76 +59,114 @@ class DepartmentForm {
             setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
         }
 
+        lManage.apply {
+            setSize(FIRST_W + 200, FIRST_H)
+            setLocation((WINDOW_WIDTH - FIRST_W - 200) / 2, FIRST_Y + (STEP * locationHelper) - 10)
+        }
+
+        locationHelper++
+
         lName.apply {
-            setSize(80, 20)
-            setLocation(10, 10)
+            setSize(FIRST_W, FIRST_H)
+            setLocation(FIRST_X, FIRST_Y + (STEP * locationHelper))
             isVisible = true
         }
 
         tfName.apply {
-            setSize(120, 20)
-            setLocation(100, 10)
+            setSize(SECOND_W, SECOND_H)
+            setLocation(SECOND_X, SECOND_Y + (STEP * locationHelper))
             isVisible = true
         }
 
+        list.apply {
+            setSize(SECOND_W + 120, SECOND_H + 150)
+            setLocation(SECOND_X + SECOND_W + 20, SECOND_Y + (STEP * locationHelper))
+        }
+
+        scList.apply {
+            setSize(SECOND_W + 120, SECOND_H + 150)
+            setLocation(SECOND_X + SECOND_W + 20, SECOND_Y + (STEP * locationHelper))
+            verticalScrollBarPolicy = ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS
+        }
+
+        locationHelper++
+
         lPhone.apply {
-            setSize(80, 20)
-            setLocation(10, 40)
+            setSize(FIRST_W, FIRST_H)
+            setLocation(FIRST_X, FIRST_Y + (STEP * locationHelper))
         }
 
         tfPhone.apply {
-            setSize(120, 20)
-            setLocation(100, 40)
+            setSize(SECOND_W, SECOND_H)
+            setLocation(SECOND_X, SECOND_Y + (STEP * locationHelper))
         }
 
+        locationHelper++
+
         lCity.apply {
-            setSize(80, 20)
-            setLocation(10, 70)
+            setSize(FIRST_W, FIRST_H)
+            setLocation(FIRST_X, FIRST_Y + (STEP * locationHelper))
         }
 
         tfCity.apply {
-            setSize(120, 20)
-            setLocation(100, 70)
+            setSize(SECOND_W, SECOND_H)
+            setLocation(SECOND_X, SECOND_Y + (STEP * locationHelper))
         }
 
+        locationHelper++
+
         lStreet.apply {
-            setSize(80, 20)
-            setLocation(10, 100)
+            setSize(FIRST_W, FIRST_H)
+            setLocation(FIRST_X, FIRST_Y + (STEP * locationHelper))
         }
 
         tfStreet.apply {
-            setSize(120, 20)
-            setLocation(100, 100)
+            setSize(SECOND_W, SECOND_H)
+            setLocation(SECOND_X, SECOND_Y + (STEP * locationHelper))
         }
 
+        locationHelper++
+
         lBuilding.apply {
-            setSize(50, 20)
-            setLocation(10, 130)
+            setSize(FIRST_W, FIRST_H)
+            setLocation(FIRST_X, FIRST_Y + (STEP * locationHelper))
         }
 
         tfBuilding.apply {
-            setSize(120, 20)
-            setLocation(100, 130)
+            setSize(SECOND_W, SECOND_H)
+            setLocation(SECOND_X, SECOND_Y + (STEP * locationHelper))
         }
 
+        locationHelper++
+
         lOffice.apply {
-            setSize(50, 20)
-            setLocation(10, 160)
+            setSize(FIRST_W, FIRST_H)
+            setLocation(FIRST_X, FIRST_Y + (STEP * locationHelper))
         }
 
         tfOffice.apply {
-            setSize(120, 20)
-            setLocation(100, 160)
+            setSize(SECOND_W, SECOND_H)
+            setLocation(SECOND_X, SECOND_Y + (STEP * locationHelper))
         }
 
+        locationHelper += 2
+
         bAdd.apply {
-            setSize(120, 20)
-            setLocation(10, 160)
+            setSize(FIRST_W + 50, FIRST_H)
+            setLocation(FIRST_X, FIRST_Y + (STEP * locationHelper))
+        }
+
+        bUpdate.apply {
+            setSize(FIRST_W + 50, FIRST_H)
+            setLocation(FIRST_X + FIRST_W + 60, FIRST_Y + (STEP * locationHelper))
+            isVisible = false
         }
 
         frMain.apply {
+            add(lManage)
             add(lName)
             add(tfName)
+            add(scList)
             add(lPhone)
             add(tfPhone)
             add(lCity)
@@ -120,6 +178,7 @@ class DepartmentForm {
             add(lOffice)
             add(tfOffice)
             add(bAdd)
+            add(bUpdate)
         }
     }
 }

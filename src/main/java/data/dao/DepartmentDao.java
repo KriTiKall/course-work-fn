@@ -8,22 +8,19 @@ import java.util.List;
 
 public class DepartmentDao extends AbstractDao<Department, Long> {
 
+    private final Department empty = new Department();
+
     public DepartmentDao(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
     @Override
     public Department read(Long id) {
-        try (final Session session = sessionFactory.openSession()) {
-            Department department = session.get(Department.class, id);
-            return department != null ? department : new Department();
-        }
+        return read(id, empty);
     }
 
     @Override
     public List<Department> getList() {
-        try (final Session session = sessionFactory.openSession()) {
-            return session.getSession().createQuery("from Department ").list();
-        }
+        return getList(empty.getClass().getName());
     }
 }

@@ -13,14 +13,15 @@ class MainForm : JFrame() {
         const val SCREEN_HEIGHT = 1080
         const val SCREEN_WIDTH = 1920
 
-        const val WINDOW_HEIGHT = 600
-        const val WINDOW_WIDTH = 800
+        const val WINDOW_HEIGHT = 450
+        const val WINDOW_WIDTH = 600
 
         const val DEFAULT_FONT_SIZE = 14
     }
 
     val mbPlatform = JMenuBar()
-    val mAdd = JMenu("Add")
+    val mAdd = JMenu("Управление")
+    val mTut = JMenu("Справка")
     val miWarehouse = JMenuItem("warehouse")
     val miClient = JMenuItem("client")
     val miProduct = JMenuItem("product")
@@ -32,11 +33,11 @@ class MainForm : JFrame() {
     val cbProduct = JComboBox<Product>()
     val numberSpinner = JSpinner(SpinnerNumberModel(1, 1, 1000, 1))
     val listItems = JList<OrderItem>()
-    val scroll1 = JScrollPane(listItems)
+    val scList = JScrollPane(listItems)
     val tpDescription = JTextPane()
-    val scroll2 = JScrollPane(tpDescription)
+    val scDesc = JScrollPane(tpDescription)
     val lOrder = JLabel("Оформление заказа")
-    val client = JLabel()
+    val lClient = JLabel()
     val lWarehouse = JLabel()
     val lItem = JLabel()
     val bAddProduct = JButton("Добавить")
@@ -44,7 +45,7 @@ class MainForm : JFrame() {
     val button = JButton("Завершить")
 
     fun init() {
-        setSize(500, 370)
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
         setLocation((SCREEN_WIDTH - WINDOW_WIDTH) / 2, (SCREEN_HEIGHT - WINDOW_HEIGHT) / 2)
         layout = null
         title = "food network"
@@ -53,6 +54,8 @@ class MainForm : JFrame() {
         isResizable = false
 
         mbPlatform.add(mAdd)
+        mbPlatform.add(mTut)
+
         mAdd.apply {
             add(miWarehouse)
             add(miClient)
@@ -63,81 +66,99 @@ class MainForm : JFrame() {
 
         lOrder.apply {
             setSize(160, 20)
-            setLocation(10, 20)
+            setLocation(30, 50)
             isVisible = true
         }
 
-        client.setSize(70, 20)
-        client.setText("Клиенты")
-        client.setLocation(10, 50)
+        lClient.apply {
+            setSize(70, 20)
+            setText("Клиенты")
+            setLocation(30, 80)
+        }
 
-        cbClient.setSize(120, 20)
-        cbClient.setLocation(80, 50)
+        cbClient.apply {
+            setSize(160, 20)
+            setLocation(100, 80)
+        }
 
-        lWarehouse.setSize(50, 20)
-        lWarehouse.setText("Склад")
-        lWarehouse.setLocation(10, 80)
+        lWarehouse.apply {
+            setSize(50, 20)
+            setText("Склад")
+            setLocation(30, 120)
+        }
 
-        cbWarehouse.setSize(120, 20)
-        cbWarehouse.setLocation(80, 80)
+        cbWarehouse.apply {
+            setSize(160, 20)
+            setLocation(100, 120)
+        }
 
-        tpDescription.setSize(200, 60)
-        tpDescription.setLocation(10, 120)
+        tpDescription.apply {
+            setSize(230, 100)
+            setLocation(30, 160)
+        }
 
-        scroll2.apply {
-            setSize(200, 60)
-            setLocation(10, 120)
+        scDesc.apply {
+            setSize(230, 100)
+            setLocation(30, 160)
             verticalScrollBarPolicy = ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS
             isVisible = true
-        }
-
-
-        lItem.setSize(120, 20)
-        lItem.setText("Создание Item")
-        lItem.setLocation(310, 20)
-
-        cbProduct.setSize(120, 20)
-        cbProduct.setLocation(230, 50)
-
-        numberSpinner.setSize(120, 20)
-        numberSpinner.setLocation(360, 50)
-
-        listItems.setSize(250, 120)
-        listItems.setLocation(230, 120)
-        listItems.isEnabled = false
-
-        scroll1.apply {
-            setSize(250, 120)
-            setLocation(230, 120)
-            verticalScrollBarPolicy = ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS
-            isVisible = true
-        }
-
-        bAddProduct.apply {
-            setSize(120, 20)
-            setLocation(360, 80)
         }
 
         bKeep.apply {
             setSize(120, 20)
-            setLocation(10, 200)
+            setLocation(30, 280)
         }
 
-        button.setSize(120, 20)
-        button.setLocation(10, 280)
+        lItem.apply {
+            setSize(120, 20)
+            setText("Создание Item")
+            setLocation(320, 50)
+        }
 
+        cbProduct.apply {
+            setSize(120, 20)
+            setLocation(320, 80)
+        }
+
+        numberSpinner.apply {
+            setSize(120, 20)
+            setLocation(450, 80)
+        }
+
+        bAddProduct.apply {
+            setSize(120, 20)
+            setLocation(450, 120)
+        }
+
+        listItems.apply {
+            setSize(250, 120)
+            setLocation(320, 160)
+            isEnabled = false
+        }
+
+        scList.apply {
+            setSize(250, 120)
+            setLocation(320, 160)
+            verticalScrollBarPolicy = ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS
+            isVisible = true
+        }
+
+        button.apply {
+            setSize(120, 20)
+            setLocation(450, 350)
+        }
 
         add(mbPlatform)
         add(lOrder)
-        add(client)
+        add(lClient)
         add(lWarehouse)
         add(cbClient)
         add(cbWarehouse)
         add(cbProduct)
         add(numberSpinner)
         add(lItem)
-        add(scroll1)
-        add(scroll2)
+        add(scList)
+        add(scDesc)
         add(bAddProduct)
         add(bKeep)
         add(button)

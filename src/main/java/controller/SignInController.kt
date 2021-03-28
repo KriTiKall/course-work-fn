@@ -7,14 +7,16 @@ class SignInController(view: SignInForm) {
 
     private val view = view
 
-    private fun initView() {
+    fun initView() {
         view.apply {
             bSignin.addActionListener(actionOfSignIn())
         }
+
+        view.createUI()
     }
 
     private fun actionOfSignIn() = ActionListener {
-
+        print("fuck u, u dead to me ${view.pfPassword.text}\n")
     }
 
 }

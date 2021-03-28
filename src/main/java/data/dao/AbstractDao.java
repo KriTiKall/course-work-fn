@@ -1,9 +1,15 @@
 package data.dao;
 
+import data.entity.EntityId;
+import data.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public abstract class AbstractDao<Entity, Key> implements DAO<Entity, Key> {
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
+public abstract class AbstractDao<Entity, Key extends Serializable> implements DAO<Entity, Key> {
 
     protected final SessionFactory sessionFactory;
 
@@ -35,6 +41,26 @@ public abstract class AbstractDao<Entity, Key> implements DAO<Entity, Key> {
             session.beginTransaction();
             session.delete(entity);
             session.getTransaction().commit();
+        }
+    }
+
+    public Entity read(Key key, Entity clazz) {
+        try (final Session session = sessionFactory.openSession()) {
+            Entity entity = (Entity) session.get(clazz.getClass(), key);
+            return entity != null ? entity : (Entity) clazz.getClass().getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Entity> getList(String name) {
+        try (final Session session = sessionFactory.openSession()) {
+            return session.getSession().createQuery("from " + name).list();
         }
     }
 }

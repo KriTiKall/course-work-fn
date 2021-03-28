@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "departments")
-public class Department {
+public class Department implements EntityId<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +15,9 @@ public class Department {
     private String phone;
     private String city;
     private String street;
+    @Column(name = "building_num")
     private Integer buildingNum;
+    @Column(name = "office_num")
     private Integer officeNum;
 
     public Long getId() {
@@ -72,5 +74,10 @@ public class Department {
 
     public void setOfficeNum(Integer officeNum) {
         this.officeNum = officeNum;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements EntityId<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,5 +46,10 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "warehouses")
-public class Warehouse {
+public class Warehouse implements EntityId<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -69,8 +69,8 @@ public class Warehouse {
 
     @Override
     public String toString() {
-        return "г. '" + city + '\'' +
-                ", ул. " + street + '\'' +
+        return "г. " + city +
+                ", ул. " + street +
                 ", д. " + buildingNum;
     }
 }

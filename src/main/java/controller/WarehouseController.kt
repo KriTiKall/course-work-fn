@@ -1,5 +1,6 @@
 package controller
 
+import data.entity.Department
 import data.entity.Warehouse
 import logic.MainService
 import view.WarehouseForm
@@ -23,12 +24,13 @@ class WarehouseController(view: WarehouseForm, service: MainService) {
     private fun actionOfAdd() = ActionListener {
         val ware = Warehouse()
         with(ware) {
-            idDepartment = (view.cbDepartment.selectedItem as Warehouse).id.toInt()
+            idDepartment = (view.cbDepartment.selectedItem as Department).id.toInt()
             phone = view.tfPhone.text
             city = view.tfCity.text
             street = view.tfStreet.text
             buildingNum = view.tfBuilding.text.toInt()
         }
         service.warDao.create(ware)
+        view.frMain.dispose()
     }
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "order_items")
-public class OrderItem {
+public class OrderItem implements EntityId<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

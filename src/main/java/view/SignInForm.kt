@@ -17,7 +17,7 @@ class SignInForm {
     }
 
     val frMain = JFrame()
-    val lSignin = JLabel("Sign in to Food Network")
+    val lSignin = JLabel("Sign in to PC Club")
     val lLogin = JLabel("Login")
     val tfLogin = JTextField()
     val lPassword = JLabel("Password")

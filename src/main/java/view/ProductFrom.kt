@@ -2,7 +2,7 @@ package view
 
 import javax.swing.*
 
-class ClientForm {
+class ProductFrom {
 
     companion object {
         const val SCREEN_HEIGHT = 1080
@@ -15,17 +15,17 @@ class ClientForm {
     val frMain = JFrame()
     val lName = JLabel("Название")
     val tfName = JTextField()
-    val lPhone = JLabel("Телефон")
-    val tfPhone = JTextField()
-    val lMail = JLabel("Почта")
-    val tfMail = JTextField()
+    val lDescription = JLabel("Описание")
+    val tfDescription = JTextField()
+    val lPrice = JLabel("Цена")
+    val tfPrice = JTextField()
     val bAdd = JButton("Добавить")
 
     fun createUI() {
         frMain.apply {
             setLocation((SCREEN_WIDTH - WINDOW_WIDTH) / 2, (SCREEN_HEIGHT - WINDOW_HEIGHT) / 2)
             layout = null
-            title = "Client"
+            title = "Product"
             defaultCloseOperation = WindowConstants.DISPOSE_ON_CLOSE
             isVisible = true
             isResizable = false
@@ -44,38 +44,38 @@ class ClientForm {
             isVisible = true
         }
 
-        lPhone.apply {
+        lDescription.apply {
             setSize(80, 20)
             setLocation(10, 40)
         }
 
-        tfPhone.apply {
+        tfDescription.apply {
             setSize(120, 20)
             setLocation(100, 40)
         }
 
-        lMail.apply {
+        lPrice.apply {
             setSize(80, 20)
             setLocation(10, 70)
         }
 
-        tfMail.apply {
+        tfPrice.apply {
             setSize(120, 20)
             setLocation(100, 70)
         }
 
         bAdd.apply {
             setSize(120, 20)
-            setLocation(10, 160)
+            setLocation(10, 180)
         }
 
         frMain.apply {
             add(lName)
             add(tfName)
-            add(lPhone)
-            add(tfPhone)
-            add(lMail)
-            add(tfMail)
+            add(lDescription)
+            add(tfDescription)
+            add(lPrice)
+            add(tfPrice)
             add(bAdd)
         }
     }

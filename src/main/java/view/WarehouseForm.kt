@@ -3,7 +3,6 @@ package view
 import data.entity.Department
 import javax.swing.*
 import javax.swing.WindowConstants.DISPOSE_ON_CLOSE
-import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
 class WarehouseForm {
 
