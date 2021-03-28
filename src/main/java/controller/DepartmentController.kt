@@ -79,7 +79,6 @@ class DepartmentController(view: DepartmentForm, service: MainService) {
 
             if (op == JOptionPane.YES_OPTION) {
                 mock.id = temp.id
-                //todo(abs class for form with bUpdate, jlist and bAdd )
                 view.bUpdate.isVisible = true
                 fromFieldToText(view, temp)
             }
@@ -108,35 +107,35 @@ class DepartmentController(view: DepartmentForm, service: MainService) {
     private fun fromTextToField(entity: Department, form: DepartmentForm) =
         entity.apply {
             form.apply {
-                name = tfName.text
-                phone = tfPhone.text
-                city = tfCity.text
-                street = tfStreet.text
-                buildingNum = tfBuilding.text.toInt()
-                officeNum = tfOffice.text.toInt()
+                name = textComponents["tfName"]?.text
+                phone = textComponents["tfPhone"]?.text
+                city = textComponents["tfCity"]?.text
+                street = textComponents["tfStreet"]?.text
+                buildingNum = textComponents["tfBuilding"]?.text!!.toInt()
+                officeNum = textComponents["tfOffice.text.toInt()"]?.text!!.toInt()
             }
         }
 
     private fun fromFieldToText(form: DepartmentForm, entity: Department) =
         entity.apply {
             form.apply {
-                tfName.text = entity.name
-                tfPhone.text = entity.phone
-                tfCity.text = entity.city
-                tfStreet.text = entity.street
-                tfBuilding.text = entity.buildingNum.toString()
-                tfOffice.text = entity.officeNum.toString()
+                textComponents["tfName"]?.text = name
+                textComponents["tfPhone"]?.text = phone
+                textComponents["tfCity"]?.text = city
+                textComponents["tfStreet"]?.text = street
+                textComponents["tfBuilding"]?.text = buildingNum.toString()
+                textComponents["tfOffice.text.toInt()"]?.text = officeNum.toString()
             }
         }
 
     private fun clean() {
         view.apply {
-            tfName.text = ""
-            tfPhone.text = ""
-            tfCity.text = ""
-            tfStreet.text = ""
-            tfBuilding.text = ""
-            tfOffice.text = ""
+            textComponents["tfName"]?.text = ""
+            textComponents["tfPhone"]?.text = ""
+            textComponents["tfCity"]?.text = ""
+            textComponents["tfStreet"]?.text = ""
+            textComponents["tfBuilding"]?.text = ""
+            textComponents["tfOffice.text.toInt()"]?.text = ""
         }
     }
 
